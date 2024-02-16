@@ -54,7 +54,7 @@ export async function getAllProducts() {
         await connectToDB();
 
         const products = await Product.find();
-
+        console.log(products)
         return products;
     } catch (error) {
         console.log(error);

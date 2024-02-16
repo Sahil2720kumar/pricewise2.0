@@ -6,6 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+export const revalidate = 0; // revalidate the data at most every 0s
+
+
+
+
 const ProductDetails = async ({ params: { id } }) => {
     const product = await getProductById(id);
     if (!product) redirect("/");

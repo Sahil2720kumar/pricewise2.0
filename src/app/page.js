@@ -4,8 +4,13 @@ import HeroCarousel from "@/components/HeroCarousel";
 import ProductCard from "@/components/ProductCard";
 import { getAllProducts } from "@/lib/actions";
 
+export const revalidate = 0; // revalidate the data at most every 0s
+
+
+
 export default async function Home() {
   const allProducts = await getAllProducts();
+  console.log(allProducts)
     return (
         <>
             <section className='px-6 md:px-20 py-24'>
