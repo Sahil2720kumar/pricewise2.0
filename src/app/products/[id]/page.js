@@ -8,21 +8,17 @@ import { redirect } from "next/navigation";
 
 export const revalidate = 0; // revalidate the data at most every 0s
 
-
-
-
 const ProductDetails = async ({ params: { id } }) => {
     const product = await getProductById(id);
     if (!product) redirect("/");
     const similarProducts = await getSimilarProducts(id);
-console.log(product)
-console.log(product.images)
+    //console.log(product);
     return (
         <div className='flex flex-col gap-16 flex-wrap px-6 md:px-20 py-24'>
             <div className='flex gap-28 xl:flex-row flex-col'>
                 <div className='flex-grow xl:max-w-[50%] max-w-full py-16 border border-[#CDDBFF] rounded-[17px]'>
                     <Image
-                        src={product.images[0]}
+                        src={product.image}
                         alt={product.title}
                         width={580}
                         height={400}
@@ -159,7 +155,7 @@ console.log(product.images)
                     </h3>
 
                     <div className='flex flex-col gap-4 w-[330px] md:w-full overflow-hidden'>
- {product?.description?.split('\n')}
+                        {product?.description?.split("\n")}
                     </div>
                 </div>
 
@@ -171,7 +167,11 @@ console.log(product.images)
                         height={22}
                     />
 
-                    <Link href={product.url} target='_blank' className='text-base text-white'>
+                    <Link
+                        href={product.url}
+                        target='_blank'
+                        className='text-base text-white'
+                    >
                         Buy Now
                     </Link>
                 </button>
@@ -179,7 +179,9 @@ console.log(product.images)
 
             {similarProducts && similarProducts?.length > 0 && (
                 <div className='py-14 flex flex-col gap-2 w-full'>
-                    <p className='text-[#282828] text-[32px] font-semibold'>Similar Products</p>
+                    <p className='text-[#282828] text-[32px] font-semibold'>
+                        Similar Products
+                    </p>
 
                     <div className='flex flex-wrap gap-10 mt-7 w-full'>
                         {similarProducts.map(product => (

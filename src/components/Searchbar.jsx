@@ -29,7 +29,7 @@ const Searchbar = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState("");
 
-    const handleSubmit = async event => {
+   /* const handleSubmit = async event => {
         setErrors("");
         event.preventDefault();
         const isValidLink = isValidAmazonProductURL(searchPrompt);
@@ -41,14 +41,27 @@ const Searchbar = () => {
             setIsLoading(true);
             // Scrape the product page
             const product = await scrapeAndStoreProduct(searchPrompt);
-            console.log(product)
+            console.log("...Searching",product)
             router.push(`/products/${product.id}`);
         } catch (error) {
             console.log(error);
         } finally {
             setIsLoading(false);
         }
-    };
+    };*/
+   const handleSubmit = async event => {
+        setErrors("");
+        event.preventDefault();
+        try {
+            setIsLoading(true);
+            // Scrape the product page
+            router.push(`/products/?product_name=${searchPrompt}`);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     return (
         <>

@@ -6,11 +6,9 @@ import { getAllProducts } from "@/lib/actions";
 
 export const revalidate = 0; // revalidate the data at most every 0s
 
-
-
 export default async function Home() {
-  const allProducts = await getAllProducts();
-  console.log(allProducts)
+    const allProducts = await getAllProducts();
+    //console.log(allProducts);
     return (
         <>
             <section className='px-6 md:px-20 py-24'>
@@ -43,7 +41,9 @@ export default async function Home() {
                 </div>
             </section>
             <section className='flex flex-col gap-10 px-6 md:px-20 py-24 '>
-                <h2 className='text-primary text-[32px] font-semibold'>Trending</h2>
+                <h2 className='text-primary text-[32px] font-semibold'>
+                    Trending
+                </h2>
 
                 {
                     <div className='flex flex-wrap gap-x-8 gap-y-16 items-center justify-center md:justify-start'>

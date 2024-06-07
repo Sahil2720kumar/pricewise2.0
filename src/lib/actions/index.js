@@ -8,7 +8,7 @@ import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 export async function scrapeAndStoreProduct(productUrl) {
     if (!productUrl) return;
     try {
-        connectToDB();
+        await connectToDB();
 
         const scrapedProduct = await scrapeAmazonProduct(productUrl);
 
@@ -42,7 +42,7 @@ export async function scrapeAndStoreProduct(productUrl) {
         );
 
         revalidatePath(`/products/${newProduct._id}`);
-
+        console.log("newProduct",newProduct._id)
         return {id:newProduct._id}
     } catch (error) {
         throw new Error(`Failed to create/update product: ${error.message}`);
@@ -54,7 +54,7 @@ export async function getAllProducts() {
         await connectToDB();
 
         const products = await Product.find();
-        console.log(products)
+       // console.log(products)
         return products;
     } catch (error) {
         console.log(error);
@@ -63,7 +63,7 @@ export async function getAllProducts() {
 
 export async function getProductById(productId) {
     try {
-        connectToDB();
+        await connectToDB();
 
         const product = await Product.findOne({ _id: productId });
 
@@ -77,7 +77,7 @@ export async function getProductById(productId) {
 
 export async function getSimilarProducts(productId) {
     try {
-        connectToDB();
+        await connectToDB();
 
         const currentProduct = await Product.findById(productId);
 
